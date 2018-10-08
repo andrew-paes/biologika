@@ -18,7 +18,7 @@ restoreDB(){
 }
 
 # Check if the function exists (bash specific)
-if declare -f "$1" > /dev/null
+if declare -f $1 > /dev/null
 then
   # call arguments verbatim
   "$@"

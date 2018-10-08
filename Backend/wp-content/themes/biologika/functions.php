@@ -78,5 +78,3 @@ function upload_image_as_attachment($image_url, $post_id, $title)
         return $id;
     }
 }
-
-?>

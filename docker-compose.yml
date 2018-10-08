@@ -30,6 +30,6 @@ services:
        WORDPRESS_DB_NAME: biologika
        WORDPRESS_DB_USER: user
        WORDPRESS_DB_PASSWORD: password       
-       WORDPRESS_DEBUG: 1
+       WORDPRESS_DEBUG: 0
 volumes:
     db_data:
