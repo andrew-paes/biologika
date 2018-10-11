@@ -4,44 +4,7 @@
 <div class="wrapper">
 	<?php echo get_template_part( 'partials/template', 'navigation' ); ?>
 
-	<?php $vitrine = get_field( 'vitrine' ); ?>
-	<?php if ( $vitrine ): ?>
-        <div class="main-slider">
-            <div class="slider" id="slider">
-                <ul class="slider__container">
-					<?php foreach ( $vitrine as $key => $item ): ?>
-						<?php $img = wp_get_attachment_image_src( $item['fundo'], 'full' ); ?>
-                        <li class="slider-item <?php echo ( $key === 0 ) ? 'is-active' : '' ?>">
-                            <figure class="slider-image"
-                                    style="background-image:url(<?php echo $img[0]; ?>)"
-                                    title="<?php the_title(); ?>"></figure>
-                            <div class="slider-text">
-                                <h2 class="slider-title"><?php echo $item['titulo'] ?></h2>
-                            </div>
-                        </li>
-					<?php endforeach; ?>
-                </ul>
-                <div class="slider-prev">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="32" viewBox="-1 -1 12 32">
-                        <path d="M 10,0 0,15 10,30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
-                              stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <div class="slider-next is-active">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="32" viewBox="-1 -1 12 32">
-                        <path d="M0 0l10 15L0 30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
-                              stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <ul class="navThumbs">
-					<?php foreach ( $vitrine as $key => $item ): ?>
-						<?php $img = wp_get_attachment_image_src( $item['fundo'], 'thumb' ); ?>
-                        <li class="slider-thumbs <?php echo ( $key === 0 ) ? 'is-active' : '' ?>" style="background-image:url(<?php echo $img[0]; ?>);"></li>
-					<?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-	<?php endif; ?>
+	<?php echo get_template_part( 'partials/template', 'vitrine' ); ?>
 
     <div class="main">
         <div class="section">
@@ -96,167 +59,130 @@
         </div>
     </div>
 
-    <div class="main colored">
-        <div class="section">
-            <div class="section-title">
-                <h2>SERVIÇOS</h2>
-                <hr class="center">
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-md-4">
-                    <div class="services">
-                        <div class="icon"><img src="<?php bloginfo( 'template_directory' ); ?>/img/master/dentist1.png"
-                                               alt="..."></div>
-                        <h5>Endodontia</h5>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                    </div>
+	<?php $servicos = get_field( 'servicos' ); ?>
+	<?php if ( $servicos ): ?>
+        <div class="main colored">
+            <div class="section">
+                <div class="section-title">
+                    <h2>SERVIÇOS</h2>
+                    <hr class="center">
+					<?php $descricao_de_servicos = get_field( 'descricao_de_servicos' ); ?>
+					<?php if ( $descricao_de_servicos ): ?>
+                        <p><?php echo $descricao_de_servicos; ?></p>
+					<?php endif ?>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="services">
-                        <div class="icon"><img src="<?php bloginfo( 'template_directory' ); ?>/img/master/dentist2.png"
-                                               alt="..."></div>
-                        <h5>Periodontia</h5>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="services">
-                        <div class="icon"><img src="<?php bloginfo( 'template_directory' ); ?>/img/master/dentist3.png"
-                                               alt="..."></div>
-                        <h5>Protéses</h5>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="services">
-                        <div class="icon"><img src="<?php bloginfo( 'template_directory' ); ?>/img/master/dentist4.png"
-                                               alt="..."></div>
-                        <h5>Cirurgia</h5>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="services">
-                        <div class="icon"><img src="<?php bloginfo( 'template_directory' ); ?>/img/master/dentist5.png"
-                                               alt="..."></div>
-                        <h5>Ortodontia</h5>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="services">
-                        <div class="icon"><img src="<?php bloginfo( 'template_directory' ); ?>/img/master/dentist6.png"
-                                               alt="..."></div>
-                        <h5>Dentística</h5>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                    </div>
+                <div class="row">
+					<?php foreach ( $servicos as $key => $item ): ?>
+						<?php $img = wp_get_attachment_image_src( $item['icone'], 'full' ); ?>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="services">
+                                <div class="icon">
+                                    <img src="<?php echo $img[0] ?>" alt="<?php the_title(); ?>">
+                                </div>
+                                <h5><?php echo $item['titulo'] ?></h5>
+                                <p>
+									<?php echo $item['descricao'] ?>
+                                </p>
+                            </div>
+                        </div>
+					<?php endforeach; ?>
                 </div>
             </div>
         </div>
-    </div>
+	<?php endif; ?>
 
-    <div class="main">
-        <div class="section">
-            <div class="section-title">
-                <h2>NOSSOS CLIENTES</h2>
-                <hr class="center">
-            </div>
-            <div class="main-gallery">
-                <div class="gallery-cell">
-                    <div class="testimonial-section">
-                        <div class="avatar"><img src="<?php bloginfo( 'template_directory' ); ?>/img/images/avatar1.jpg"
-                                                 alt=""></div>
-                        <div class="testimonial-quote">
-                            <p>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                                occaecati cupiditate non provident."</p>
-                        </div>
-                        <div class="autor">
-                            <h5>João Roberto</h5>
-                        </div>
-                    </div>
+	<?php $clientes = get_field( 'clientes' ); ?>
+	<?php if ( $clientes ): ?>
+        <div class="main">
+            <div class="section">
+                <div class="section-title">
+                    <h2>NOSSOS CLIENTES</h2>
+                    <hr class="center">
                 </div>
-                <div class="gallery-cell">
-                    <div class="testimonial-section">
-                        <div class="avatar"><img src="<?php bloginfo( 'template_directory' ); ?>/img/images/avatar2.jpg"
-                                                 alt=""></div>
-                        <div class="testimonial-quote">
-                            <p>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                                occaecati cupiditate non provident."</p>
+                <div class="main-gallery">
+					<?php foreach ( $clientes as $key => $item ): ?>
+						<?php $img = wp_get_attachment_image_src( $item['foto'], 'full' ); ?>
+
+                        <div class="gallery-cell">
+                            <div class="testimonial-section">
+                                <div class="avatar">
+                                    <img src="<?php echo $img[0] ?>" alt="<?php the_title(); ?>">
+                                </div>
+                                <div class="testimonial-quote">
+									<?php echo $item['comentario']; ?>
+                                </div>
+                                <div class="autor">
+                                    <h5><?php echo $item['nome']; ?></h5>
+                                </div>
+                            </div>
                         </div>
-                        <div class="autor">
-                            <h5>Mário Caetano</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-cell">
-                    <div class="testimonial-section">
-                        <div class="avatar"><img src="<?php bloginfo( 'template_directory' ); ?>/img/images/avatar3.jpg"
-                                                 alt=""></div>
-                        <div class="testimonial-quote">
-                            <p>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                                occaecati cupiditate non provident."</p>
-                        </div>
-                        <div class="autor">
-                            <h5>Camila Clotilde</h5>
-                        </div>
-                    </div>
+					<?php endforeach; ?>
                 </div>
             </div>
         </div>
-    </div>
+	<?php endif; ?>
 
     <div class="main parallax">
-        <img src="<?php bloginfo( 'template_directory' ); ?>/img/images/medical2.jpg" data-speed="-1.5"
-             class="img-parallax" alt="...">
+		<?php $informacoes = get_field( 'informacoes' ); ?>
+
+        <img src="<?php bloginfo( 'template_directory' ); ?>/img/images/medical2.jpg" data-speed="-1.5" class="img-parallax" alt="...">
         <div class="inner-counter">
             <div class="row">
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <circle-counter>
-                        <div class="counter-icon">
-                            <i class="fa fa-hospital-o" aria-hidden="true"></i>
-                        </div>
-                        <span class="counter circle">6</span>
-                        <h5>CONSULTÒRIOS</h5>
-                    </circle-counter>
-                </div>
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <circle-counter>
-                        <div class="counter-icon">
-                            <i class="fa fa-user-md" aria-hidden="true"></i>
-                        </div>
-                        <span class="counter circle">4</span>
-                        <h5>ESPECIALISTAS</h5>
-                    </circle-counter>
-                </div>
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <circle-counter>
-                        <div class="counter-icon">
-                            <i class="fa fa-medkit" aria-hidden="true"></i>
-                        </div>
-                        <span class="counter circle">1199</span>
-                        <h5>ATENDIMENTOS</h5>
-                    </circle-counter>
-                </div>
+				<?php if ( $informacoes['consultorios'] ): ?>
+                    <div class="col-xs-6 col-sm-3 col-md-3">
+                        <circle-counter>
+                            <div class="counter-icon">
+                                <i class="fa fa-hospital-o" aria-hidden="true"></i>
+                            </div>
+                            <span class="counter circle">
+                                <?php echo $informacoes['consultorios']; ?>
+                            </span>
+                            <h5>CONSULTÒRIOS</h5>
+                        </circle-counter>
+                    </div>
+				<?php endif; ?>
+
+				<?php if ( $informacoes['especialistas'] ): ?>
+                    <div class="col-xs-6 col-sm-3 col-md-3">
+                        <circle-counter>
+                            <div class="counter-icon">
+                                <i class="fa fa-user-md" aria-hidden="true"></i>
+                            </div>
+                            <span class="counter circle">
+                                <?php echo $informacoes['especialistas']; ?>
+                            </span>
+                            <h5>ESPECIALISTAS</h5>
+                        </circle-counter>
+                    </div>
+				<?php endif; ?>
+
+				<?php if ( $informacoes['atendimentos'] ): ?>
+                    <div class="col-xs-6 col-sm-3 col-md-3">
+                        <circle-counter>
+                            <div class="counter-icon">
+                                <i class="fa fa-medkit" aria-hidden="true"></i>
+                            </div>
+                            <span class="counter circle">
+                                <?php echo $informacoes['atendimentos']; ?>
+                            </span>
+                            <h5>ATENDIMENTOS</h5>
+                        </circle-counter>
+                    </div>
+				<?php endif; ?>
+
+	            <?php if ( $informacoes['clientes'] ): ?>
                 <div class="col-xs-6 col-sm-3 col-md-3">
                     <circle-counter>
                         <div class="counter-icon">
                             <i class="fa fa-smile-o" aria-hidden="true"></i>
                         </div>
-                        <span class="counter circle">433</span>
-                        <h5>CIENTES</h5>
+                        <span class="counter circle">
+                                <?php echo $informacoes['clientes']; ?>
+                            </span>
+                        <h5>CLIENTES</h5>
                     </circle-counter>
                 </div>
+	            <?php endif; ?>
             </div>
         </div>
     </div>
@@ -270,87 +196,7 @@
                     totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
             </div>
             <div class="row">
-                <div class="col-sm-4 col-md-4">
-                    <div class="card">
-                        <img src="<?php bloginfo( 'template_directory' ); ?>/img/images/staff.jpg" alt="Avatar"
-                             style="width:100%">
-                        <div class="box-card">
-                            <h4><b>Vanessa Chazan</b></h4>
-                            <h6>Prótese</h6>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                            <div class="span-icons">
-                                <div class="card-icons"><a href="#"><i class="fa fa-linkedin"
-                                                                       aria-hidden="true"></i></a></div>
-                                <div class="card-icons"><a href="#"><i class="fa fa-dribbble"
-                                                                       aria-hidden="true"></i></a></div>
-                                <div class="card-icons"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-md-4">
-                    <div class="card">
-                        <img src="<?php bloginfo( 'template_directory' ); ?>/img/images/staff2.jpg" alt="Avatar"
-                             style="width:100%">
-                        <div class="box-card">
-                            <h4><b>Maurício Anastacio</b></h4>
-                            <h6>Periodontia</h6>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                            <div class="span-icons">
-                                <div class="card-icons"><a href="#"><i class="fa fa-linkedin"
-                                                                       aria-hidden="true"></i></a></div>
-                                <div class="card-icons"><a href="#"><i class="fa fa-dribbble"
-                                                                       aria-hidden="true"></i></a></div>
-                                <div class="card-icons"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-md-4">
-                    <div class="card">
-                        <img src="<?php bloginfo( 'template_directory' ); ?>/img/images/staff3.jpg" alt="Avatar"
-                             style="width:100%">
-                        <div class="box-card">
-                            <h4><b>Fernanda Kruger Bidese</b></h4>
-                            <h6>Ortodontia</h6>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                            <div class="span-icons">
-                                <div class="card-icons"><a href="#"><i class="fa fa-linkedin"
-                                                                       aria-hidden="true"></i></a></div>
-                                <div class="card-icons"><a href="#"><i class="fa fa-dribbble"
-                                                                       aria-hidden="true"></i></a></div>
-                                <div class="card-icons"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-md-4">
-                    <div class="card">
-                        <img src="<?php bloginfo( 'template_directory' ); ?>/img/images/staff.jpg" alt="Avatar"
-                             style="width:100%">
-                        <div class="box-card">
-                            <h4><b>Andressa Gasparetto Moreira</b></h4>
-                            <h6>Exodontia</h6>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                            <div class="span-icons">
-                                <div class="card-icons"><a href="#"><i class="fa fa-linkedin"
-                                                                       aria-hidden="true"></i></a></div>
-                                <div class="card-icons"><a href="#"><i class="fa fa-dribbble"
-                                                                       aria-hidden="true"></i></a></div>
-                                <div class="card-icons"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+	            <?php echo get_template_part( 'partials/template', 'profissionais' ); ?>
             </div>
         </div>
     </div>
