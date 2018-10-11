@@ -7,6 +7,7 @@ add_image_size('fullscreen', '1920', '', true);
 add_image_size('equipe', '1170', '', true);
 add_image_size('area', '264', '264', true);
 add_image_size('banner', '370', '', true);
+add_image_size('thumb', '100', '100', true);
 
 
 //Removi funções de Emoticons do WP
