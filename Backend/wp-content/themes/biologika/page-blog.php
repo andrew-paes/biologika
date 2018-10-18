@@ -19,219 +19,72 @@
             <div class="section">
                 <div class="row">
                     <div class="col-md-9">
-                        <div class="post-preview">
-                            <div class="photo-preview"><img src="http://placehold.it/800x520" alt=""></div>
-                            <div class="post-details">
-                                <h5 class="post-title">All about swollen taste buds</h5>
-                                <p class="post-text">
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
-                                    excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
-                                    officia deserunt mollitia animi, id est laborum et dolorum fuga.
-                                </p>
-                                <p class="author"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; November 29,
-                                    2017 10:47 AM</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Read More</button>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="line-post">
-                        <div class="post-preview">
-                            <div class="photo-preview"><img src="http://placehold.it/800x520" alt=""></div>
-                            <div class="post-details">
-                                <h5 class="post-title">What causes pericoronitis?</h5>
-                                <p class="post-text">
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
-                                    excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
-                                    officia deserunt mollitia animi, id est laborum et dolorum fuga.
-                                </p>
-                                <p class="author"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; November 29,
-                                    2017 10:47 AM</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Read More</button>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="line-post">
-                        <div class="post-preview">
-                            <div class="photo-preview"><img src="http://placehold.it/800x520" alt=""></div>
-                            <div class="post-details">
-                                <h5 class="post-title">Causes and treatment of gingivitis</h5>
-                                <p class="post-text">
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
-                                    excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
-                                    officia deserunt mollitia animi, id est laborum et dolorum fuga.
-                                </p>
-                                <p class="author"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; November 29,
-                                    2017 10:47 AM</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Read More</button>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="line-post">
-                        <div class="post-preview">
-                            <div class="photo-preview"><img src="http://placehold.it/800x520" alt=""></div>
-                            <div class="post-details">
-                                <h5 class="post-title">Scalloped tongue: What you need to know</h5>
-                                <p class="post-text">
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
-                                    excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
-                                    officia deserunt mollitia animi, id est laborum et dolorum fuga.
-                                </p>
-                                <p class="author"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; November 29,
-                                    2017 10:47 AM</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Read More</button>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="line-post">
-                        <div class="post-preview">
-                            <div class="photo-preview"><img src="http://placehold.it/800x520" alt=""></div>
-                            <div class="post-details">
-                                <h5 class="post-title">What to know about chronic sinusitis</h5>
-                                <p class="post-text">
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
-                                    excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
-                                    officia deserunt mollitia animi, id est laborum et dolorum fuga.
-                                </p>
-                                <p class="author"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; November 29,
-                                    2017 10:47 AM</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Read More</button>
-                                </p>
-                            </div>
-                        </div>
+						<?php
+						// Run WP_Query
+						// change posts_per_page value to limit the number of posts
+						// set the "paged" parameter (use 'page' if the query is on a static front page)
+						$paged = ( get_query_var( 'pagina' ) ) ? get_query_var( 'pagina' ) : 1;
+
+						$args = [
+							"post_type"      => "post",
+							"page"           => $paged,
+							"posts_per_page" => 1
+						];
+
+						if ( get_query_var( 'categoria' ) ) {
+							$args['cat'] = get_query_var( 'categoria' );
+						}
+
+						$query = new WP_Query( $args );
+
+						//begin loop
+						if ( $query->have_posts() ):
+							while ( $query->have_posts() ) : $query->the_post();
+								$post     = $query->post;
+								$banner   = get_field( 'banner', $query->ID );
+								$img      = wp_get_attachment_image_src( $banner, 'full' );
+								$date     = strtotime( $post->post_date );
+								$constent = strip_tags( $post->post_content );
+								$corpo    = strlen( $constent ) > 150 ? substr( $constent, 0, 150 ) . '...' : $constent;
+								?>
+
+                                <div class="post-preview">
+                                    <div class="photo-preview">
+                                        <img class="media-object" src="<?php echo $img[0]; ?>"
+                                             alt="<?php the_title(); ?>">
+                                    </div>
+                                    <div class="post-details">
+                                        <h5 class="post-title"><?php the_title(); ?></h5>
+                                        <p class="post-text">
+											<?php echo $corpo; ?>
+                                        </p>
+                                        <p class="author"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;
+											<?php echo date( 'm, Y H:m', $date ) ?></p>
+                                        <p>
+                                            <a href="<?php the_permalink(); ?>" type="button" class="btn btn-primary">
+                                                Ler mais
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+								<?php if ( ( $query->current_post + 1 ) != ( $query->post_count ) ): ?>
+                                    <hr class="line-post">
+								<?php endif; ?>
+
+							<?php endwhile;
+						// end loop
+						else:
+							?>
+                            <h2>Nenhuma notícia encontrada...</h2>
+						<?php
+						endif;
+						?>
                     </div>
                     <div class="col-md-3">
-                        <div class="sidebar">
-                            <div class="inner-sidebar">
-                                <div class="search-box">
-                                    <form class="search-container">
-                                        <div class="form-group" style="display:inline;">
-                                            <div class="input-group">
-                                                <input type="text" placeholder="Seach items" class="form-control">
-                                                <span class="input-group-addon"><i class="fa fa-search"
-                                                                                   aria-hidden="true"></i></span>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="inner-sidebar">
-                                <div class="categories-box">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <span class="badge">(21)</span>
-                                            General Medicine
-                                        </li>
-                                        <li class="divider-categories"></li>
-                                        <li class="list-group-item">
-                                            <span class="badge">(33)</span>
-                                            Endodontic
-                                        </li>
-                                        <li class="divider-categories"></li>
-                                        <li class="list-group-item">
-                                            <span class="badge">(11)</span>
-                                            Prosthodontics
-                                        </li>
-                                        <li class="divider-categories"></li>
-                                        <li class="list-group-item">
-                                            <span class="badge">(14)</span>
-                                            Family Dentistry
-                                        </li>
-                                        <li class="divider-categories"></li>
-                                        <li class="list-group-item">
-                                            <span class="badge">(17)</span>
-                                            Prosthodontics
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="inner-sidebar">
-                                <div class="recent-posts">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="http://placehold.it/400x400" alt="...">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">Could Botox stop teeth grinding?</h5>
-                                            <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; Octuber 11, 2017
-                                            </p>
-                                            <p><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp; 45 comments</p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="http://placehold.it/400x400" alt="...">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">All about angular cheilitis.</h5>
-                                            <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; Octuber 10, 2017
-                                            </p>
-                                            <p><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp; 65 comments</p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="http://placehold.it/400x400" alt="...">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">Laboratories adopting new technologies.</h5>
-                                            <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; Octuber 9, 2017
-                                            </p>
-                                            <p><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp; 25 comments</p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="http://placehold.it/400x400" alt="...">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">Scientific research is very important.</h5>
-                                            <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; Octuber 8, 2017
-                                            </p>
-                                            <p><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp; 77 comments</p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="http://placehold.it/400x400" alt="...">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">What is burning mouth syndrome?</h5>
-                                            <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; Octuber 7, 2017
-                                            </p>
-                                            <p><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp; 45 comments</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inner-sidebar"><img src="http://placehold.it/800x1100" alt=""
-                                                            class="banner-img"></div>
-                        </div>
+						<?php echo get_template_part( 'partials/template', 'sidebar-blog' ); ?>
                     </div>
                     <div class="span-pagination">
+                        
                         <nav aria-label="Page navigation">
                             <div class="pagination">
                                 <a href="#">Prev</a>
