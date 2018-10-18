@@ -8,7 +8,7 @@
             <div class="section-heading">
                 <div class="section">
                     <div class="span-title">
-                        <h1>Equipe</h1>
+                        <h1><?php the_title() ?></h1>
                         <div class="page-map"><p>Home &nbsp;/&nbsp; Equipe</p></div>
                     </div>
                 </div>
@@ -20,8 +20,14 @@
                 <div class="section-title">
                     <h2>NOSSOS DOUTORES</h2>
                     <hr class="center">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                        totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
+
+					<?php $subtitle = get_field( 'sub-titulo' ); ?>
+
+					<?php if ( $subtitle ): ?>
+                        <p>
+							<?php echo $subtitle; ?>
+                        </p>
+					<?php endif; ?>
                 </div>
                 <div class="row">
                     <div class="col-sm-4 col-md-4">
