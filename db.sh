@@ -8,12 +8,12 @@ export EXPORTED_FILE="./db/${CONTAINER}.sql"
 
 
 # Backup
-exportDB(){
+export(){
  docker exec ${CONTAINER} /usr/bin/mysqldump -u ${USER} --password=${PASSWORD} ${DATABASE} > ${EXPORTED_FILE}
 }
 
 # Restore
-restoreDB(){
+restore(){
  cat ${EXPORTED_FILE} | docker exec -i ${CONTAINER} /usr/bin/mysql -u ${USER} --password=${PASSWORD} ${DATABASE}
 }
 

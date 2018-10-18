@@ -53,15 +53,19 @@
 					<?php foreach ( $posts as $item ): ?>
 
 						<?php
-						$noticia = $item['noticia'];
-						$date    = strtotime( $noticia->post_date );
+						$noticia        = $item['noticia'];
+						$date           = strtotime( $noticia->post_date );
+						$titulo         = $noticia->post_title;
+						$constent       = strip_tags( $noticia->post_content );
+						$corpo          = strlen( $constent ) > 150 ? substr( $constent, 0, 150 ) . '...' : $constent;
+						$post_author_id = get_user_by( 'ID', $noticia->post_author );
 						?>
 
 						<?php var_dump( $item ); ?>
 
                         <div class="col-sm-6 col-md-4">
                             <div class="post-news">
-                                <a href="#">
+                                <a href="<?php echo get_post_permalink( $noticia->ID ); ?>">
                                     <img src="http://placehold.it/800x500" alt="...">
                                 </a>
                                 <div class="post-date">
@@ -69,14 +73,17 @@
                                     <p><?php echo strtoupper( date( 'M', $date ) ); ?></p>
                                 </div>
                                 <div class="caption">
-                                    <h5>Clareamento e Higieme</h5>
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                        doloremque
-                                        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
+                                    <h5><?php echo $titulo ?></h5>
+                                    <p>
+										<?php echo $corpo; ?>
+                                    </p>
                                     <div class="post-preview-detail">
-                                        <p>Por Vanessa Chazan &nbsp;&nbsp; <i class="fa fa-comments-o"
-                                                                              aria-hidden="true"></i>
-                                            &nbsp; 165 comentários
+                                        <p>Por <?php echo $post_author_id->data->display_name; ?>
+                                            &nbsp;&nbsp;
+                                            <i class="fa fa-comments-o" aria-hidden="true"></i>
+											<?php if ( $noticia->comment_count > 0 ): ?>
+                                                &nbsp; <?php echo $noticia->comment_count ?> comentários
+											<?php endif ?>
                                         </p>
                                     </div>
                                 </div>

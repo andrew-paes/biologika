@@ -28,12 +28,12 @@ Ou através do seu gerenciador de DB.
 
 ## Exportação do DB
  ```shell
- db.sh exportDB 
+ db.sh export 
  ```
  
  ## Restaurar o DB
   ```shell
-  db.sh restoreDB 
+  db.sh restore 
   ```
   
 ## Admin
