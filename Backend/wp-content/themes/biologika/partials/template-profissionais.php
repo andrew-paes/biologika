@@ -53,3 +53,5 @@ query_posts( $args );
         </div>
 	<?php endwhile; ?>
 <?php endif; ?>
+
+<?php wp_reset_query(); ?>

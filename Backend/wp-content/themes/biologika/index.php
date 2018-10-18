@@ -4,11 +4,7 @@
 <div class="wrapper">
 	<?php echo get_template_part( 'partials/template', 'navigation' ); ?>
 
-	<?php wp_reset_query(); ?>
-
 	<?php echo get_template_part( 'partials/template', 'vitrine' ); ?>
-
-	<?php wp_reset_query(); ?>
 
     <div class="main">
         <div class="section">
@@ -84,20 +80,7 @@
 					<?php endif ?>
                 </div>
                 <div class="row">
-					<?php foreach ( $servicos as $key => $item ): ?>
-						<?php $img = wp_get_attachment_image_src( $item['icone'], 'full' ); ?>
-                        <div class="col-sm-6 col-md-4">
-                            <div class="services">
-                                <div class="icon">
-                                    <img src="<?php echo $img[0] ?>" alt="<?php the_title(); ?>">
-                                </div>
-                                <h5><?php echo $item['titulo'] ?></h5>
-                                <p>
-									<?php echo $item['descricao'] ?>
-                                </p>
-                            </div>
-                        </div>
-					<?php endforeach; ?>
+	                <?php echo get_template_part( 'partials/template', 'servicos' ); ?>
                 </div>
             </div>
         </div>

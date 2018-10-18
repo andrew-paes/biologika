@@ -1,15 +1,32 @@
 ﻿<?php get_header(); ?>
 
+<?php
+$horarios_de_atendimento = get_field( 'horarios_de_atendimento' );
+$endereco                = get_field( 'endereco' );
+$banner                  = get_field( 'banner' );
+$imgBanner               = wp_get_attachment_image_src( $banner, 'full' );
+
+$titulo        = get_field( 'titulo' );
+$subtitulo     = get_field( 'subtitulo' );
+$email         = get_field( 'email' );
+$telefone      = get_field( 'telefone' );
+$redes_sociais = get_field( 'redes_sociais' );
+$facebook      = $redes_sociais['facebook'];
+$twitter       = $redes_sociais['twitter'];
+$instagram     = $redes_sociais['instagram'];
+$linkedin      = $redes_sociais['linkedin'];
+?>
+
     <!-- MAIN CONTAINER -->
     <div class="wrapper">
 		<?php echo get_template_part( 'partials/template', 'navigation' ); ?>
 
-        <div class="pages-header">
+        <div class="pages-header" style="background-image: url(<?php echo $imgBanner[0]; ?>);">
             <div class="section-heading">
                 <div class="section">
                     <div class="span-title">
-                        <h1>Contact Us</h1>
-                        <div class="page-map"><p>Home &nbsp;/&nbsp; Contact Us</p></div>
+                        <h1>Contato</h1>
+                        <div class="page-map"><p>Home &nbsp;/&nbsp; <?php echo $titulo; ?></p></div>
                     </div>
                 </div>
             </div>
@@ -18,10 +35,11 @@
         <div class="main">
             <div class="section">
                 <div class="section-title">
-                    <h2>GET IN TOUCH</h2>
+                    <h2><?php echo $titulo; ?></h2>
                     <hr class="center">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                        totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
+                    <p>
+						<?php echo $subtitulo; ?>
+                    </p>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -29,16 +47,16 @@
                             <div class="address-box">
                                 <div class="icon-circle"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
                                 <div class="address-info">
-                                    <h6>Address</h6>
-                                    <p>1415 Woodlawn Ave. Buffalo New York, USA 10451.</p>
+                                    <h6>Endereço</h6>
+                                    <p><?php echo $endereco['address']; ?></p>
                                 </div>
                             </div>
 
                             <div class="address-box">
                                 <div class="icon-circle"><i class="fa fa-phone" aria-hidden="true"></i></div>
                                 <div class="address-info">
-                                    <h6>Phone</h6>
-                                    <p>212-869-3323</p>
+                                    <h6>Telefone</h6>
+                                    <p><?php echo $telefone; ?></p>
                                 </div>
                             </div>
 
@@ -46,7 +64,7 @@
                                 <div class="icon-circle"><i class="fa fa-envelope" aria-hidden="true"></i></div>
                                 <div class="address-info">
                                     <h6>Email</h6>
-                                    <p>info@dentalcare.com</p>
+                                    <p><?php echo $email; ?></p>
                                 </div>
                             </div>
                         </div>

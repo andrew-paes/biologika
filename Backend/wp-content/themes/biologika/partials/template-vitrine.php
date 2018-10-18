@@ -64,3 +64,5 @@ query_posts( $args );
         </div>
     </div>
 <?php endif; ?>
+
+<?php wp_reset_query(); ?>

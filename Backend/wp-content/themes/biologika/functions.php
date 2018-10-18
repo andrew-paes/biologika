@@ -79,3 +79,13 @@ function upload_image_as_attachment( $image_url, $post_id, $title ) {
 		return $id;
 	}
 }
+
+function my_acf_google_map_api( $api ) {
+
+	$api['key'] = 'AIzaSyBKEb1AlchTdpu9dLzLVo8I8BNxYPlEldY';
+
+	return $api;
+
+}
+
+add_filter( 'acf/fields/google_map/api', 'my_acf_google_map_api' );
