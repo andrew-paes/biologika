@@ -30,6 +30,6 @@
         </div>
     </div>
     <div class="inner-sidebar">
-		<?php echo do_shortcode( '[wpb_most_commented]' ); ?>
+		<?php echo do_shortcode( '[wpb-random-posts]' ); ?>
     </div>
 </div>

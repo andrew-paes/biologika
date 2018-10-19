@@ -20,15 +20,12 @@
                 <div class="row">
                     <div class="col-md-9">
 						<?php
-						// Run WP_Query
-						// change posts_per_page value to limit the number of posts
-						// set the "paged" parameter (use 'page' if the query is on a static front page)
-						$paged = ( get_query_var( 'pagina' ) ) ? get_query_var( 'pagina' ) : 1;
+						$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 
 						$args = [
 							"post_type"      => "post",
 							"page"           => $paged,
-							"posts_per_page" => 1
+							"posts_per_page" => 10
 						];
 
 						if ( get_query_var( 'categoria' ) ) {
@@ -84,18 +81,7 @@
 						<?php echo get_template_part( 'partials/template', 'sidebar-blog' ); ?>
                     </div>
                     <div class="span-pagination">
-                        
-                        <nav aria-label="Page navigation">
-                            <div class="pagination">
-                                <a href="#">Prev</a>
-                                <a class="active" href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#">4</a>
-                                <a href="#">5</a>
-                                <a href="#">Next</a>
-                            </div>
-                        </nav>
+	                    <?php echo do_shortcode( '[custom_pagination_posts]' ); ?>
                     </div>
                 </div>
             </div>

@@ -81,72 +81,19 @@ function upload_image_as_attachment( $image_url, $post_id, $title ) {
 }
 
 function my_acf_google_map_api( $api ) {
-
 	$api['key'] = 'AIzaSyBKEb1AlchTdpu9dLzLVo8I8BNxYPlEldY';
 
 	return $api;
-
 }
 
 add_filter( 'acf/fields/google_map/api', 'my_acf_google_map_api' );
 
 
-function wpb_most_commented_posts() {
-// start output buffering
-	ob_start();
-	?>
-    <div class="recent-posts">
-		<?php
-		// Run WP_Query
-		// change posts_per_page value to limit the number of posts
-		$query = new WP_Query( 'orderby=comment_count&posts_per_page=10' );
-
-		//begin loop
-		while ( $query->have_posts() ) : $query->the_post();
-			$post   = $query->post;
-			$banner = get_field( 'banner', $post->ID );
-			$img    = wp_get_attachment_image_src( $banner, 'banner' );
-			$date   = strtotime( $post->post_date );
-			?>
-
-            <div class="media">
-                <div class="media-left">
-                    <a href="<?php the_permalink(); ?>">
-                        <img class="media-object" src="<?php echo $img[0]; ?>" alt="<?php the_title(); ?>">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h5 class="media-heading"><?php the_title(); ?></h5>
-                    <p>
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; <?php echo date( 'd M Y', $date ) ?>
-                    </p>
-                    <p>
-                        <i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp;
-						<?php echo $query->count; ?> comentários
-                    </p>
-                </div>
-            </div>
-			<?php if ( ( $query->current_post + 1 ) != ( $query->post_count ) ): ?>
-                <hr>
-			<?php endif; ?>
-
-		<?php endwhile;
-		// end loop
-		?>
-    </div>
-	<?php
-
-// Turn off output buffering
-	$output = ob_get_clean();
-
-//Return output
-	return $output;
-}
-
-function custom_pagination( $pages = 40, $range = 2 ) {
-	$showitems = ( $range * 2 ) + 1;
-
+function custom_pagination( $pages = '', $range = 2 ) {
+	$showitems = ( ( $range || 3 ) * 2 ) + 1;
+	
 	global $paged;
+
 	if ( empty( $paged ) ) {
 		$paged = 1;
 	}
@@ -158,19 +105,20 @@ function custom_pagination( $pages = 40, $range = 2 ) {
 			$pages = 1;
 		}
 	}
-
+	
 	if ( 1 != $pages ) {
-		echo "<div class='pagination'>";
+		echo "<nav aria-label=\"Page navigation\"><div class=\"pagination\">";
 		if ( $paged > 2 && $paged > $range + 1 && $showitems < $pages ) {
 			echo "<a href='" . get_pagenum_link( 1 ) . "'>&laquo;</a>";
 		}
+
 		if ( $paged > 1 && $showitems < $pages ) {
 			echo "<a href='" . get_pagenum_link( $paged - 1 ) . "'>&lsaquo;</a>";
 		}
 
 		for ( $i = 1; $i <= $pages; $i ++ ) {
 			if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
-				echo ( $paged == $i ) ? "<span class='current'>" . $i . "</span>" : "<a href='" . get_pagenum_link( $i ) . "' class='inactive' >" . $i . "</a>";
+				echo ( $paged == $i ) ? "<a class='active'>" . $i . "</a>" : "<a href='" . get_pagenum_link( $i ) . "'>" . $i . "</a>";
 			}
 		}
 
@@ -180,13 +128,46 @@ function custom_pagination( $pages = 40, $range = 2 ) {
 		if ( $paged < $pages - 1 && $paged + $range - 1 < $pages && $showitems < $pages ) {
 			echo "<a href='" . get_pagenum_link( $pages ) . "'>&raquo;</a>";
 		}
-		echo "</div>\n";
+		echo "</div></nav>\n";
 	}
 }
 
-// Create shortcode
-add_shortcode( 'custom_pagination', 'custom_pagination_posts' );
-add_shortcode( 'wpb_most_commented', 'wpb_most_commented_posts' );
+function wpb_rand_posts() {
+	$string = '<div class="recent-posts">';
+	$args   = array(
+		'post_type'      => 'post',
+		'orderby'        => 'rand',
+		'posts_per_page' => 5,
+	);
 
-//Enable shortcode execution in text widgets
+	$the_query = new WP_Query( $args );
+
+	if ( $the_query->have_posts() ):
+		while ( $the_query->have_posts() ) : $the_query->the_post();
+			$post      = $the_query->post;
+			$banner    = get_field( 'banner', $post->ID );
+			$img       = wp_get_attachment_image_src( $banner, 'banner' );
+			$date      = strtotime( $post->post_date );
+			$dateF     = date( 'd M Y', $date );
+			$permalink = get_the_permalink();
+			$title     = get_the_title();
+
+			$string .= "<div class=\"media\"><div class=\"media-left\"><a href=\"{$permalink}\"><img class=\"media-object\" src=\"{$img[0]}\" alt=\"{$title}\"></a></div><div class=\"media-body\"><h5 class=\"media-heading\">{$title}</h5><p><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i>&nbsp; {$dateF}</p></div></div>";
+
+			if ( ( $the_query->current_post + 1 ) != ( $the_query->post_count ) ):
+				$string .= "<hr>";
+			endif;
+
+		endwhile;
+
+		wp_reset_query();
+	endif;
+
+	$string .= '</div>';
+
+	return $string;
+}
+
+add_shortcode( 'custom_pagination_posts', 'custom_pagination' );
+add_shortcode( 'wpb-random-posts', 'wpb_rand_posts' );
 add_filter( 'widget_text', 'do_shortcode' );
