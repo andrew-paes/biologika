@@ -105,39 +105,44 @@ $linkedin                = $redes_sociais['linkedin'];
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="<?php echo home_url( '/' ) ?>">HOME</a></li>
-                        <li><a href="<?php echo get_permalink( get_page_by_path( 'sobre' ) ) ?>">SOBRE</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">
-                                SERVIÇOS <span class="caret-drop"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="divider-top"></li>
-                                <li>
-                                    <a href="<?php echo get_permalink( get_page_by_path( 'cirurgia', OBJECT, 'servicos' ) ) ?>">Cirurgia</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="<?php echo get_permalink( get_page_by_path( 'dentistica', OBJECT, 'servicos' ) ) ?>">Dentística</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="<?php echo get_permalink( get_page_by_path( 'endodontia', OBJECT, 'servicos' ) ) ?>">Endodontia</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="<?php echo get_permalink( get_page_by_path( 'ortodontia', OBJECT, 'servicos' ) ) ?>">Ortodontia</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="<?php echo get_permalink( get_page_by_path( 'periodontia', OBJECT, 'servicos' ) ) ?>">Periodontia</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="<?php echo get_permalink( get_page_by_path( 'proteses', OBJECT, 'servicos' ) ) ?>">Protéses</a>
-                                </li>
-                            </ul>
-                        </li>
+                        <!--<li><a href="sobre.html">SOBRE</a></li>-->
+						<?php
+						$args  = [
+							'post_type' => 'servicos',
+							'fields'    => 'ids'
+						];
+						$count = 0;
+						$query = new WP_Query( $args );
+						?>
+						<?php if ( $query->have_posts() ): ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    SERVIÇOS <span class="caret-drop"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+									<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+										<?php if ( $count == 0 ): ?>
+                                            <li class="divider-top"></li>
+										<?php else: ?>
+                                            <li class="divider"></li>
+										<?php endif; ?>
+                                        <li>
+                                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                        </li>
+										<?php
+										$count ++;
+									endwhile;
+									?>
+                                </ul>
+                            </li>
+						<?php
+
+						endif;
+
+						wp_reset_query();
+
+						?>
                         <li>
                             <a href="<?php echo get_permalink( get_page_by_path( 'blog' ) ) ?>">BLOG</a>
                         </li>

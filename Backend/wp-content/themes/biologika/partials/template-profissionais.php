@@ -15,41 +15,43 @@ query_posts( $args );
 		?>
 
         <div class="col-sm-4 col-md-4">
-            <div class="card">
-                <img src="<?php echo $img[0] ?>" alt="<?php echo $nome; ?>" style="width:100%">
-                <div class="box-card">
-                    <h4><b><?php echo $nome; ?></b></h4>
-                    <h6><?php echo $especialidade; ?></h6>
-                    <p>
-						<?php echo $descricao; ?>
-                    </p>
-                    <div class="span-icons">
-						<?php if ( $redes_sociais['linkedin'] ): ?>
-                            <div class="card-icons">
-                                <a href="<?php echo $redes_sociais['linkedin']; ?>">
-                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                </a>
-                            </div>
-						<?php endif; ?>
-                        
-	                    <?php if ( $redes_sociais['site'] ): ?>
-                        <div class="card-icons">
-                            <a href="<?php echo $redes_sociais['site']; ?>">
-                                <i class="fa fa-dribbble" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <?php endif; ?>
+            <a href="<?php the_permalink(); ?>">
+                <div class="card">
+                    <img src="<?php echo $img[0] ?>" alt="<?php echo $nome; ?>" style="width:100%">
+                    <div class="box-card">
+                        <h4><b><?php echo $nome; ?></b></h4>
+                        <h6><?php echo $especialidade; ?></h6>
+                        <p>
+							<?php echo $descricao; ?>
+                        </p>
+                        <div class="span-icons">
+							<?php if ( $redes_sociais['linkedin'] ): ?>
+                                <div class="card-icons">
+                                    <a href="<?php echo $redes_sociais['linkedin']; ?>">
+                                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+							<?php endif; ?>
 
-	                    <?php if ( $redes_sociais['twitter'] ): ?>
-                        <div class="card-icons">
-                            <a href="<?php echo $redes_sociais['twitter']; ?>">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
+							<?php if ( $redes_sociais['site'] ): ?>
+                                <div class="card-icons">
+                                    <a href="<?php echo $redes_sociais['site']; ?>">
+                                        <i class="fa fa-dribbble" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+							<?php endif; ?>
+
+							<?php if ( $redes_sociais['twitter'] ): ?>
+                                <div class="card-icons">
+                                    <a href="<?php echo $redes_sociais['twitter']; ?>">
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+							<?php endif; ?>
                         </div>
-                        <?php endif; ?>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 	<?php endwhile; ?>
 <?php endif; ?>
