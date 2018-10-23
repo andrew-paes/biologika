@@ -13,15 +13,17 @@ query_posts( $args );
 
 		<?php $img = wp_get_attachment_image_src( $imagem, 'full' ); ?>
         <div class="col-sm-6 col-md-4">
-            <div class="services">
-                <div class="icon">
-                    <img src="<?php echo $img[0] ?>" alt="<?php the_title(); ?>">
+            <a href="<?php the_permalink(); ?>">
+                <div class="services">
+                    <div class="icon">
+                        <img src="<?php echo $img[0] ?>" alt="<?php the_title(); ?>">
+                    </div>
+                    <h5><?php echo $titulo ?></h5>
+                    <p>
+                        <?php echo $descricao_de_servicos ?>
+                    </p>
                 </div>
-                <h5><?php echo $titulo ?></h5>
-                <p>
-					<?php echo $descricao_de_servicos ?>
-                </p>
-            </div>
+            </a>
         </div>
 	<?php endwhile; ?>
 <?php endif; ?>
