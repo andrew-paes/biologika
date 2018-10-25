@@ -1,25 +1,25 @@
 ﻿<?php get_header(); ?>
 
 <?php
-$horarios_de_atendimento = get_field( 'horarios_de_atendimento' );
-$endereco                = get_field( 'endereco' );
-$banner                  = get_field( 'banner' );
-$imgBanner               = wp_get_attachment_image_src( $banner, 'full' );
+$horarios_de_atendimento = get_field('horarios_de_atendimento');
+$endereco = get_field('endereco');
+$banner = get_field('banner');
+$imgBanner = wp_get_attachment_image_src($banner, 'full');
 
-$titulo        = get_field( 'titulo' );
-$subtitulo     = get_field( 'subtitulo' );
-$email         = get_field( 'email' );
-$telefone      = get_field( 'telefone' );
-$redes_sociais = get_field( 'redes_sociais' );
-$facebook      = $redes_sociais['facebook'];
-$twitter       = $redes_sociais['twitter'];
-$instagram     = $redes_sociais['instagram'];
-$linkedin      = $redes_sociais['linkedin'];
+$titulo = get_field('titulo');
+$subtitulo = get_field('subtitulo');
+$email = get_field('email');
+$telefone = get_field('telefone');
+$redes_sociais = get_field('redes_sociais');
+$facebook = $redes_sociais['facebook'];
+$twitter = $redes_sociais['twitter'];
+$instagram = $redes_sociais['instagram'];
+$linkedin = $redes_sociais['linkedin'];
 ?>
 
     <!-- MAIN CONTAINER -->
     <div class="wrapper">
-		<?php echo get_template_part( 'partials/template', 'navigation' ); ?>
+        <?php echo get_template_part('partials/template', 'navigation'); ?>
 
         <div class="pages-header" style="background-image: url(<?php echo $imgBanner[0]; ?>);">
             <div class="section-heading">
@@ -38,7 +38,7 @@ $linkedin      = $redes_sociais['linkedin'];
                     <h2><?php echo $titulo; ?></h2>
                     <hr class="center">
                     <p>
-						<?php echo $subtitulo; ?>
+                        <?php echo $subtitulo; ?>
                     </p>
                 </div>
                 <div class="row">
@@ -77,8 +77,8 @@ $linkedin      = $redes_sociais['linkedin'];
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input id="form_name" type="text" name="name" class="form-control customize"
-                                                   placeholder="Name" required="required"
-                                                   data-error="Firstname is required.">
+                                                   placeholder="Nome" required="required"
+                                                   data-error="Nome é obrigatório.">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -87,8 +87,8 @@ $linkedin      = $redes_sociais['linkedin'];
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input id="form_email" type="email" name="email"
-                                                   class="form-control customize" placeholder="Email address"
-                                                   required="required" data-error="Valid email is required.">
+                                                   class="form-control customize" placeholder="Email"
+                                                   required="required" data-error="Email é obrigatório.">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@ $linkedin      = $redes_sociais['linkedin'];
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input id="form_phone" type="tel" name="phone"
-                                                   class="form-control customize" placeholder="Please enter your phone">
+                                                   class="form-control customize" placeholder="Telefone">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -105,14 +105,15 @@ $linkedin      = $redes_sociais['linkedin'];
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea id="form_message" name="message" class="form-control customize"
-                                                      placeholder="Your message" rows="6" required="required"
-                                                      data-error="Please,leave us a message."></textarea>
+                                            <textarea id="form_message" name="message"
+                                                      class="form-control customize"
+                                                      placeholder="Mensagem" rows="6" required="required"
+                                                      data-error="Deixe sua mensagem."></textarea>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <p><input type="submit" class="btn btn-primary" value="Send message"></p>
+                                        <p><input type="submit" class="btn btn-primary" value="Enviar"></p>
                                     </div>
                                 </div>
                             </div>
@@ -125,6 +126,6 @@ $linkedin      = $redes_sociais['linkedin'];
     </div>
     <!-- END MAIN CONTAINER -->
 
-<?php echo get_template_part( 'partials/template', 'footer' ); ?>
+<?php echo get_template_part('partials/template', 'footer'); ?>
 
 <?php get_footer(); ?>
