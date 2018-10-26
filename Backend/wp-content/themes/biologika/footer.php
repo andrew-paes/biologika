@@ -4,11 +4,6 @@
     =============================================== -->
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 <script src="<?php bloginfo( 'template_directory' ); ?>/js/bootstrap.min.js"></script>
-<script src="<?php bloginfo( 'template_directory' ); ?>/js/loader.js"></script>
-<script src="<?php bloginfo( 'template_directory' ); ?>/js/top.js"></script>
-<script src="<?php bloginfo( 'template_directory' ); ?>/js/navbar.js"></script>
-<script src="<?php bloginfo( 'template_directory' ); ?>/js/parallax.js"></script>
-<script src="<?php bloginfo( 'template_directory' ); ?>/js/counter.js"></script>
 <script src="<?php bloginfo( 'template_directory' ); ?>/js/jquery.waypoints.min.js"></script>
 <script src="<?php bloginfo( 'template_directory' ); ?>/js/jquery.counterup.js"></script>
 <script src='<?php bloginfo( 'template_directory' ); ?>/js/flickity.pkgd.min.js'></script>
@@ -17,6 +12,16 @@
 <script src='<?php bloginfo( 'template_directory' ); ?>/js/carousel.min.js'></script>
 <script src='<?php bloginfo( 'template_directory' ); ?>/js/splittext.min.js'></script>
 <script src="<?php bloginfo( 'template_directory' ); ?>/js/slider.js"></script>
+<script src="<?php bloginfo( 'template_directory' ); ?>/js/loader.js"></script>
+<script src="<?php bloginfo( 'template_directory' ); ?>/js/top.js"></script>
+<script src="<?php bloginfo( 'template_directory' ); ?>/js/navbar.js"></script>
+<script src="<?php bloginfo( 'template_directory' ); ?>/js/parallax.js"></script>
+<script src="<?php bloginfo( 'template_directory' ); ?>/js/counter.js"></script>
+
+<?php if (is_page('contato')): ?>
+    <script src="<?php bloginfo( 'template_directory' ); ?>/js/validator.js"></script>
+    <script src="<?php bloginfo( 'template_directory' ); ?>/js/contact.js"></script>
+<?php endif; ?>
 
 <script>
     (function (i, s, o, g, r, a, m) {

@@ -1,29 +1,39 @@
 "use strict";
 $(function () {
+    var contactForm = $('#contact-form');
 
-    $('#contact-form').validator();
+    if (contactForm.length) {
+        contactForm.validator();
 
-    $('#contact-form').on('submit', function (e) {
-        if (!e.isDefaultPrevented()) {
-            var url = "contact.php";
+        contactForm.on('submit', function (e) {
+            if (!e.isDefaultPrevented()) {
+                e.preventDefault();
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: $(this).serialize(),
-                success: function (data)
-                {
-                    var messageAlert = 'alert-' + data.type;
-                    var messageText = data.message;
+                var btn = contactForm.find('.btn');
 
-                    var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
-                    if (messageAlert && messageText) {
-                        $('#contact-form').find('.messages').html(alertBox);
-                        $('#contact-form')[0].reset();
+                var url = "/email/form_contato.php";
+
+                btn.val('Enviando');
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        var messageAlert = 'alert-' + data.type;
+                        var messageText = data.message;
+
+                        var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
+                        btn.val('Enviar');
+
+                        if (messageAlert && messageText) {
+                            contactForm.find('.messages').html(alertBox);
+                            contactForm[0].reset();
+                        }
                     }
-                }
-            });
+                });
+            }
             return false;
-        }
-    })
+        })
+    }
 });

@@ -98,7 +98,7 @@ $linkedin                = $redes_sociais['linkedin'];
                     </button>
                     <a class="navbar-brand" href="<?php echo home_url( '/' ); ?>">
                         <div class="logo-brand">
-                            <img src="<?php bloginfo( 'template_directory' ); ?>/img/master/logo.png" alt="">
+                            <img src="<?php blogcontact-forminfo( 'template_directory' ); ?>/img/master/logo.png" alt="">
                         </div>
                     </a>
                 </div>

@@ -70,7 +70,7 @@ $linkedin = $redes_sociais['linkedin'];
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <form id="contact-form" method="post" action="contact.php">
+                        <form id="contact-form" method="post" action="/email/form_contato.php">
                             <div class="messages"></div>
                             <div class="controls">
                                 <div class="row">
