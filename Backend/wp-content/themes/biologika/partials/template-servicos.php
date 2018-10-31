@@ -1,17 +1,19 @@
 <?php
-$args = array( 'post_type' => 'servicos', 'orderby' => 'menu_order', 'order' => 'ASC', 'showposts' => - 1 );
-query_posts( $args );
+$args = array('post_type' => 'servicos', 'orderby' => 'menu_order', 'order' => 'ASC', 'showposts' => -1);
+query_posts($args);
 ?>
 
-<?php if ( have_posts() ) : ?>
-	<?php while ( have_posts() ) : the_post(); ?>
-		<?php
-		$imagem                = get_field( 'icone' );
-		$titulo                = get_field( 'titulo' );
-		$descricao_de_servicos = get_field( 'descricao_de_servicos' );
-		?>
+<?php if (have_posts()) : ?>
+    <div class="row">
+    <?php $counter = 1; ?>
+    <?php while (have_posts()) : the_post(); ?>
+        <?php
+        $imagem = get_field('icone');
+        $titulo = get_field('titulo');
+        $descricao_de_servicos = get_field('descricao_de_servicos');
+        ?>
 
-		<?php $img = wp_get_attachment_image_src( $imagem, 'full' ); ?>
+        <?php $img = wp_get_attachment_image_src($imagem, 'full'); ?>
         <div class="col-sm-6 col-md-4">
             <a href="<?php the_permalink(); ?>">
                 <div class="services">
@@ -25,7 +27,13 @@ query_posts( $args );
                 </div>
             </a>
         </div>
-	<?php endwhile; ?>
+        <?php if ($counter > 0 && $counter % 3 === 0): ?>
+            </div>
+            <div class="row">
+        <?php endif; ?>
+    <?php $counter++; ?>
+    <?php endwhile; ?>
+    </div>
 <?php endif; ?>
 
 <?php wp_reset_query(); ?>

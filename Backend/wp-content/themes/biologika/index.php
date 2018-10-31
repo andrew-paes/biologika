@@ -17,7 +17,7 @@
                         </h2>
                         <hr class="short">
                         <h5>
-                            <?php echo get_field('subtitulo'); ?> 
+                            <?php echo get_field('subtitulo'); ?>
                         </h5>
                         <?php echo get_field('descricao_sessao'); ?>
 
@@ -85,9 +85,7 @@
                         <p><?php echo $descricao_de_servicos; ?></p>
                     <?php endif ?>
                 </div>
-                <div class="row">
-                    <?php echo get_template_part('partials/template', 'servicos'); ?>
-                </div>
+                <?php echo get_template_part('partials/template', 'servicos'); ?>
             </div>
         </div>
     <?php endif; ?>
